@@ -57,13 +57,10 @@
   document.body.style.display = 'none';
   document.head.insertAdjacentHTML("beforeend", `<style>.fullpage{display: block!important;} .howu-sticky{display: none;}#howu-poll-outer.fullpage button.howu-end-btn{display: none;}#howu-poll-outer.fullpage a .howu-end-btn{display: block !important;}</style>`)
   document.body.style.setProperty('background-color', 'white', 'important');
-  document.querySelector('#app').style.setProperty('background-color', 'white', 'important');
 
-    (()=>{
-      const id = window.location.hash.substr(2);
-      console.log(id);
-      getPollData('https://api.howuku.com', id);
-    })();
+  const id = window.location.hash.substr(2);
+  console.log(id);
+  getPollData('https://api.howuku.com', id);
   </script>
 </body>
 </html>
