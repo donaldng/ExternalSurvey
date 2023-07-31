@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  #app {
+    display: inline;
+  }
+  </style>
+
+  <style>
+  #app, body {
+    background-color:white !important;
+  }
+  </style>
+</head>
+<body>
+  <div class="row">
+  </div>
+
+  <script>
+  window.fullpageSurvey = 1;
+  
+  function getPollData(API_ENDPOINT, id) {
+    fetch(API_ENDPOINT + '/poll/id/' + id)
+      .then(response => response.json())
+      .then(data => {
+        (function(t,r,a,c,k){
+          c=['track','identify','converted'],t.o=t._init||{},
+          c.map(function(n){return t.o[n]=t.o[n]||function(){(t.o[n].q=t.o[n].q||[]).push(arguments);};}),t._init=t.o,
+          k=r.createElement("script"),k.type="text/javascript",k.async=true,k.src="https://cdn.howuku.com/js/track.js",k.setAttribute("key",a),
+          r.getElementsByTagName("head")[0].appendChild(k);
+        })(window, document, data.key);
+
+        let interval = setInterval(() => {
+          try {
+            document.querySelector('.howu-sticky').classList.add('d-none')  
+            window.fullpageSurvey = 1
+            document.body.style.display = 'block';
+            startPoll(id)
+            clearInterval(interval)
+          } catch (err) {}
+        }, 100)
+      });
+  }
+
+  let interval = setInterval(() => {
+    if (!document.querySelector('.fullpage') && document.querySelector('#howu-poll-outer')) {
+      document.querySelector('#howu-poll-outer').classList.add('fullpage')
+      clearInterval(interval)
+    }
+  }, 100);
+
+  // Show Survey On External Link
+  window.fullpageSurvey = 1;
+  
+  document.body.style.display = 'none';
+  document.head.insertAdjacentHTML("beforeend", `<style>.fullpage{display: block!important;} .howu-sticky{display: none;}#howu-poll-outer.fullpage button.howu-end-btn{display: none;}#howu-poll-outer.fullpage a .howu-end-btn{display: block !important;}</style>`)
+  document.body.style.setProperty('background-color', 'white', 'important');
+  document.querySelector('#app').style.setProperty('background-color', 'white', 'important');
+
+  const id = window.location.pathname.split('/').pop();
+
+  // Start fetching poll data, replace 'your-api-endpoint' with your actual API endpoint
+  getPollData('https://api.howuku.com', id);
+  </script>
+</body>
+</html>
