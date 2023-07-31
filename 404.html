@@ -61,9 +61,9 @@
   document.body.style.setProperty('background-color', 'white', 'important');
 
   const pathname = window.location.pathname;
-  let id = pathname.split('/')[1];
-  if (pathname.includes('/link/') id = pathname.split('/')[2];
-  getPollData('https://api.howuku.com', id);
+  let code = pathname.split('/')[1];
+  if (pathname.includes('/link/') code = pathname.split('/')[2];
+  getPollData('https://api.howuku.com', code);
   </script>
 </body>
 </html>
