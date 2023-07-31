@@ -23,7 +23,6 @@
     history.pushState({ page: 1 }, "Some title", '/link' + path)
   }
 
-    
   window.doNotStartSurvey = 1;
   window.fullpageSurvey = 1;
   
@@ -56,16 +55,14 @@
       clearInterval(interval)
     }
   }, 100);
-
-  // Show Survey On External Link
-  window.fullpageSurvey = 1;
   
   document.body.style.display = 'none';
   document.head.insertAdjacentHTML("beforeend", `<style>.fullpage{display: block!important;} .howu-sticky{display: none;}#howu-poll-outer.fullpage button.howu-end-btn{display: none;}#howu-poll-outer.fullpage a .howu-end-btn{display: block !important;}</style>`)
   document.body.style.setProperty('background-color', 'white', 'important');
 
-  const id = window.location.pathname.split('/')[1];
-  console.log(id);
+  const pathname = window.location.pathname;
+  let id = pathname.split('/')[1];
+  if (pathname.includes('/link/') id = pathname.split('/')[2];
   getPollData('https://api.howuku.com', id);
   </script>
 </body>
