@@ -59,10 +59,11 @@
   document.body.style.setProperty('background-color', 'white', 'important');
   document.querySelector('#app').style.setProperty('background-color', 'white', 'important');
 
-  const id = window.location.hash.substr(2);
-
-  // Start fetching poll data, replace 'your-api-endpoint' with your actual API endpoint
-  getPollData('https://api.howuku.com', id);
+    (()=>{
+      const id = window.location.hash.substr(2);
+      console.log(id);
+      getPollData('https://api.howuku.com', id);
+    })();
   </script>
 </body>
 </html>
