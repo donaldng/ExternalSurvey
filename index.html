@@ -18,6 +18,11 @@
   </div>
 
   <script>
+  if (window.location.hash.length > 1) {
+    const path = window.location.hash.replace('#', '')
+    history.pushState({ page: 1 }, "Some title", '/link' + path)
+  }
+
   window.doNotStartSurvey = 1;
   window.fullpageSurvey = 1;
   
@@ -50,17 +55,16 @@
       clearInterval(interval)
     }
   }, 100);
-
-  // Show Survey On External Link
-  window.fullpageSurvey = 1;
   
   document.body.style.display = 'none';
   document.head.insertAdjacentHTML("beforeend", `<style>.fullpage{display: block!important;} .howu-sticky{display: none;}#howu-poll-outer.fullpage button.howu-end-btn{display: none;}#howu-poll-outer.fullpage a .howu-end-btn{display: block !important;}</style>`)
   document.body.style.setProperty('background-color', 'white', 'important');
 
-  const id = window.location.pathname.split('/')[1];
-  console.log(id);
-  getPollData('https://api.howuku.com', id);
+  const pathname = window.location.pathname;
+  let code = pathname.split('/')[1];
+  if (pathname.includes('/link/') code = pathname.split('/')[2];
+  getPollData('https://api.howuku.com', code);
   </script>
 </body>
 </html>
+
